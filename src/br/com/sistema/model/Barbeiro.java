@@ -1,18 +1,18 @@
 package br.com.sistema.model;
 
 /**
- *
- * @author Prof.Darlon Franklin
+ * Modelo de dados para Barbeiro
  */
-public class Cliente {
+public class Barbeiro {
 
     private int id;
     private String nome;
     private String cpf;
 
-    public Cliente() { }
+    public Barbeiro() {
+    }
 
-    public Cliente(int id, String nome, String cpf) {
+    public Barbeiro(int id, String nome, String cpf) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
