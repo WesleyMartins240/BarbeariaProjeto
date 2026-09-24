@@ -17,12 +17,13 @@ public class FrmMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabelBanner = new javax.swing.JLabel();
-        jLabelSub = new javax.swing.JLabel();
         btnQuickAgendamento = new javax.swing.JButton();
         btnQuickBarbeiros = new javax.swing.JButton();
+        btnQuickClientes = new javax.swing.JButton();
         btnQuickSair = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        menuClientes = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -36,12 +37,7 @@ public class FrmMenu extends javax.swing.JFrame {
         jLabelBanner.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelBanner.setText("Sistema de Barbearia");
 
-        jLabelSub.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabelSub.setForeground(new java.awt.Color(102, 102, 102));
-        jLabelSub.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelSub.setText("Painel Principal de Gestão e Atendimento");
-
-        btnQuickAgendamento.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        btnQuickAgendamento.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnQuickAgendamento.setText("Agendamento de Serviços");
         btnQuickAgendamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,11 +45,19 @@ public class FrmMenu extends javax.swing.JFrame {
             }
         });
 
-        btnQuickBarbeiros.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        btnQuickBarbeiros.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnQuickBarbeiros.setText("Cadastro de Barbeiros");
         btnQuickBarbeiros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuickBarbeirosActionPerformed(evt);
+            }
+        });
+
+        btnQuickClientes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnQuickClientes.setText("Cadastro de Clientes");
+        btnQuickClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuickClientesActionPerformed(evt);
             }
         });
 
@@ -66,6 +70,14 @@ public class FrmMenu extends javax.swing.JFrame {
         });
 
         jMenu1.setText("Cadastros");
+
+        menuClientes.setText("Clientes");
+        menuClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuClientesActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuClientes);
 
         jMenuItem3.setText("Barbeiros");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -107,26 +119,26 @@ public class FrmMenu extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelBanner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelSub, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnQuickAgendamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnQuickBarbeiros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnQuickClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnQuickSair, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(25, 25, 25)
                 .addComponent(jLabelBanner)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelSub)
-                .addGap(35, 35, 35)
-                .addComponent(btnQuickAgendamento, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnQuickBarbeiros, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnQuickSair, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(btnQuickAgendamento, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnQuickBarbeiros, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnQuickClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnQuickSair, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -144,6 +156,10 @@ public class FrmMenu extends javax.swing.JFrame {
         abrirBarbeiros();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void menuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuClientesActionPerformed
+        abrirClientes();
+    }//GEN-LAST:event_menuClientesActionPerformed
+
     private void btnQuickAgendamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickAgendamentoActionPerformed
         abrirAgendamentos();
     }//GEN-LAST:event_btnQuickAgendamentoActionPerformed
@@ -152,9 +168,18 @@ public class FrmMenu extends javax.swing.JFrame {
         abrirBarbeiros();
     }//GEN-LAST:event_btnQuickBarbeirosActionPerformed
 
+    private void btnQuickClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickClientesActionPerformed
+        abrirClientes();
+    }//GEN-LAST:event_btnQuickClientesActionPerformed
+
     private void btnQuickSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickSairActionPerformed
         sair();
     }//GEN-LAST:event_btnQuickSairActionPerformed
+
+    private void abrirClientes() {
+        FrmCliente frmCliente = new FrmCliente();
+        frmCliente.setVisible(true);
+    }
 
     private void abrirAgendamentos() {
         FrmAgendamentos frmAgendamentos = new FrmAgendamentos();
@@ -205,14 +230,15 @@ public class FrmMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnQuickAgendamento;
     private javax.swing.JButton btnQuickBarbeiros;
+    private javax.swing.JButton btnQuickClientes;
     private javax.swing.JButton btnQuickSair;
     private javax.swing.JLabel jLabelBanner;
-    private javax.swing.JLabel jLabelSub;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem menuClientes;
     private javax.swing.JMenuItem menuSair;
     // End of variables declaration//GEN-END:variables
 }

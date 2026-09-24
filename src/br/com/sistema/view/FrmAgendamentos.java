@@ -2,8 +2,10 @@ package br.com.sistema.view;
 
 import br.com.sistema.dao.AgendamentoDAO;
 import br.com.sistema.dao.BarbeiroDAO;
+import br.com.sistema.dao.ClienteDAO;
 import br.com.sistema.model.Agendamento;
 import br.com.sistema.model.Barbeiro;
+import br.com.sistema.model.Cliente;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -14,13 +16,14 @@ import javax.swing.table.DefaultTableModel;
 public class FrmAgendamentos extends javax.swing.JFrame {
 
     AgendamentoDAO agendamentoDAO = new AgendamentoDAO();
+    ClienteDAO clienteDAO = new ClienteDAO();
     BarbeiroDAO barbeiroDAO = new BarbeiroDAO();
 
     public FrmAgendamentos() {
         initComponents();
         rowClickEditar();
         setLocationRelativeTo(null);
-        carregarBarbeiros();
+        carregarCombos();
         listarAgendamentos();
     }
 
@@ -30,7 +33,7 @@ public class FrmAgendamentos extends javax.swing.JFrame {
 
         jLabelTitulo = new javax.swing.JLabel();
         jLabelCliente = new javax.swing.JLabel();
-        txtCliente = new javax.swing.JTextField();
+        cbCliente = new javax.swing.JComboBox<String>();
         jLabelBarbeiro = new javax.swing.JLabel();
         cbBarbeiro = new javax.swing.JComboBox<String>();
         jLabelServico = new javax.swing.JLabel();
@@ -38,7 +41,7 @@ public class FrmAgendamentos extends javax.swing.JFrame {
         jLabelData = new javax.swing.JLabel();
         txtData = new javax.swing.JTextField();
         jLabelHorario = new javax.swing.JLabel();
-        txtHorario = new javax.swing.JTextField();
+        cbHorario = new javax.swing.JComboBox<String>();
         jLabelValor = new javax.swing.JLabel();
         txtValor = new javax.swing.JTextField();
         jLabelPesquisar = new javax.swing.JLabel();
@@ -59,7 +62,9 @@ public class FrmAgendamentos extends javax.swing.JFrame {
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabelTitulo.setText("Agendamento de Serviços");
 
-        jLabelCliente.setText("Nome do Cliente:");
+        jLabelCliente.setText("Cliente:");
+
+        cbCliente.setEditable(true);
 
         jLabelBarbeiro.setText("Barbeiro:");
 
@@ -73,6 +78,14 @@ public class FrmAgendamentos extends javax.swing.JFrame {
         jLabelData.setText("Data (DD/MM/AAAA):");
 
         jLabelHorario.setText("Horário:");
+
+        cbHorario.setEditable(true);
+        cbHorario.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { 
+            "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", 
+            "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", 
+            "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", 
+            "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00" 
+        }));
 
         jLabelValor.setText("Valor (R$):");
 
@@ -172,7 +185,7 @@ public class FrmAgendamentos extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelCliente)
-                                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelBarbeiro)
@@ -188,7 +201,7 @@ public class FrmAgendamentos extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelHorario)
-                                    .addComponent(txtHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelValor)
@@ -217,7 +230,7 @@ public class FrmAgendamentos extends javax.swing.JFrame {
                             .addComponent(jLabelServico))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbBarbeiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -228,7 +241,7 @@ public class FrmAgendamentos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabelPesquisar)
@@ -249,12 +262,12 @@ public class FrmAgendamentos extends javax.swing.JFrame {
         if (evt.getClickCount() == 2) {
             int linha = tabelaAgendamentos.getSelectedRow();
             if (linha != -1) {
-                txtCliente.setText(tabelaAgendamentos.getValueAt(linha, 1).toString());
-                cbBarbeiro.setSelectedItem(tabelaAgendamentos.getValueAt(linha, 2).toString());
-                cbServico.setSelectedItem(tabelaAgendamentos.getValueAt(linha, 3).toString());
-                txtData.setText(tabelaAgendamentos.getValueAt(linha, 4).toString());
-                txtHorario.setText(tabelaAgendamentos.getValueAt(linha, 5).toString());
-                txtValor.setText(tabelaAgendamentos.getValueAt(linha, 6).toString());
+                cbCliente.setSelectedItem(tabelaAgendamentos.getValueAt(linha, 1) != null ? tabelaAgendamentos.getValueAt(linha, 1).toString() : "");
+                cbBarbeiro.setSelectedItem(tabelaAgendamentos.getValueAt(linha, 2) != null ? tabelaAgendamentos.getValueAt(linha, 2).toString() : "");
+                cbServico.setSelectedItem(tabelaAgendamentos.getValueAt(linha, 3) != null ? tabelaAgendamentos.getValueAt(linha, 3).toString() : "");
+                txtData.setText(tabelaAgendamentos.getValueAt(linha, 4) != null ? tabelaAgendamentos.getValueAt(linha, 4).toString() : "");
+                cbHorario.setSelectedItem(tabelaAgendamentos.getValueAt(linha, 5) != null ? tabelaAgendamentos.getValueAt(linha, 5).toString() : "08:00");
+                txtValor.setText(tabelaAgendamentos.getValueAt(linha, 6) != null ? tabelaAgendamentos.getValueAt(linha, 6).toString() : "");
             }
         }
     }//GEN-LAST:event_tabelaAgendamentosMouseClicked
@@ -279,8 +292,19 @@ public class FrmAgendamentos extends javax.swing.JFrame {
         pesquisar();
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
-    private void carregarBarbeiros() {
+    private void carregarCombos() {
+        cbCliente.removeAllItems();
         cbBarbeiro.removeAllItems();
+
+        try {
+            List<Cliente> clientes = clienteDAO.listar();
+            for (Cliente c : clientes) {
+                cbCliente.addItem(c.getNome());
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar clientes: " + e.getMessage());
+        }
+
         try {
             List<Barbeiro> barbeiros = barbeiroDAO.listar();
             for (Barbeiro b : barbeiros) {
@@ -315,17 +339,28 @@ public class FrmAgendamentos extends javax.swing.JFrame {
     }
 
     private void salvar() {
-        if (txtCliente.getText().trim().isEmpty() || cbBarbeiro.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Informe o nome do cliente e selecione um barbeiro!");
+        String nomeCliente = cbCliente.getSelectedItem() != null ? cbCliente.getSelectedItem().toString().trim() : "";
+        String nomeBarbeiro = cbBarbeiro.getSelectedItem() != null ? cbBarbeiro.getSelectedItem().toString().trim() : "";
+        String horario = cbHorario.getSelectedItem() != null ? cbHorario.getSelectedItem().toString().trim() : "";
+
+        if (nomeCliente.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe ou selecione o nome do cliente!");
+            cbCliente.requestFocus();
+            return;
+        }
+
+        if (nomeBarbeiro.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe ou selecione o barbeiro!");
+            cbBarbeiro.requestFocus();
             return;
         }
 
         Agendamento a = new Agendamento();
-        a.setCliente(txtCliente.getText().trim());
-        a.setBarbeiro(cbBarbeiro.getSelectedItem().toString());
+        a.setCliente(nomeCliente);
+        a.setBarbeiro(nomeBarbeiro);
         a.setServico(cbServico.getSelectedItem() != null ? cbServico.getSelectedItem().toString() : "");
-        a.setData(txtData.getText());
-        a.setHorario(txtHorario.getText());
+        a.setData(txtData.getText().trim());
+        a.setHorario(horario);
 
         try {
             a.setValor(Double.parseDouble(txtValor.getText().replace(",", ".")));
@@ -340,7 +375,7 @@ public class FrmAgendamentos extends javax.swing.JFrame {
     }
 
     private void pesquisar() {
-        String texto = txtPesquisar.getText();
+        String texto = txtPesquisar.getText().trim();
         DefaultTableModel modelo = (DefaultTableModel) tabelaAgendamentos.getModel();
         modelo.setRowCount(0);
         List<Agendamento> lista = agendamentoDAO.pesquisarPorCliente(texto);
@@ -383,19 +418,30 @@ public class FrmAgendamentos extends javax.swing.JFrame {
             return;
         }
 
-        if (txtCliente.getText().trim().isEmpty() || cbBarbeiro.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Informe o nome do cliente e selecione um barbeiro!");
+        String nomeCliente = cbCliente.getSelectedItem() != null ? cbCliente.getSelectedItem().toString().trim() : "";
+        String nomeBarbeiro = cbBarbeiro.getSelectedItem() != null ? cbBarbeiro.getSelectedItem().toString().trim() : "";
+        String horario = cbHorario.getSelectedItem() != null ? cbHorario.getSelectedItem().toString().trim() : "";
+
+        if (nomeCliente.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe ou selecione o nome do cliente!");
+            cbCliente.requestFocus();
+            return;
+        }
+
+        if (nomeBarbeiro.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe ou selecione o barbeiro!");
+            cbBarbeiro.requestFocus();
             return;
         }
 
         int id = (int) tabelaAgendamentos.getValueAt(linha, 0);
         Agendamento a = new Agendamento();
         a.setId(id);
-        a.setCliente(txtCliente.getText().trim());
-        a.setBarbeiro(cbBarbeiro.getSelectedItem() != null ? cbBarbeiro.getSelectedItem().toString() : "");
+        a.setCliente(nomeCliente);
+        a.setBarbeiro(nomeBarbeiro);
         a.setServico(cbServico.getSelectedItem() != null ? cbServico.getSelectedItem().toString() : "");
-        a.setData(txtData.getText());
-        a.setHorario(txtHorario.getText());
+        a.setData(txtData.getText().trim());
+        a.setHorario(horario);
 
         try {
             a.setValor(Double.parseDouble(txtValor.getText().replace(",", ".")));
@@ -432,14 +478,13 @@ public class FrmAgendamentos extends javax.swing.JFrame {
     }
 
     private void limparCampos() {
-        txtCliente.setText("");
         txtData.setText("");
-        txtHorario.setText("");
         txtValor.setText("");
         txtPesquisar.setText("");
+        if (cbCliente.getItemCount() > 0) cbCliente.setSelectedIndex(0);
         if (cbBarbeiro.getItemCount() > 0) cbBarbeiro.setSelectedIndex(0);
         if (cbServico.getItemCount() > 0) cbServico.setSelectedIndex(0);
-        txtCliente.requestFocus();
+        if (cbHorario.getItemCount() > 0) cbHorario.setSelectedIndex(0);
     }
 
     public static void main(String args[]) {
@@ -474,6 +519,8 @@ public class FrmAgendamentos extends javax.swing.JFrame {
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbBarbeiro;
+    private javax.swing.JComboBox<String> cbCliente;
+    private javax.swing.JComboBox<String> cbHorario;
     private javax.swing.JComboBox<String> cbServico;
     private javax.swing.JLabel jLabelBarbeiro;
     private javax.swing.JLabel jLabelCliente;
@@ -486,9 +533,7 @@ public class FrmAgendamentos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelAcoes;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelaAgendamentos;
-    private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtData;
-    private javax.swing.JTextField txtHorario;
     private javax.swing.JTextField txtPesquisar;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
