@@ -21,7 +21,6 @@ public class FrmLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabelTitulo = new javax.swing.JLabel();
-        jLabelSubtitulo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -36,11 +35,6 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitulo.setText("Barbearia");
-
-        jLabelSubtitulo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabelSubtitulo.setForeground(new java.awt.Color(102, 102, 102));
-        jLabelSubtitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelSubtitulo.setText("Acesso ao Sistema de Gestão");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("E-mail:");
@@ -76,7 +70,6 @@ public class FrmLogin extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelSubtitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1)
                     .addComponent(txtEmail)
                     .addComponent(jLabel2)
@@ -92,9 +85,7 @@ public class FrmLogin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabelTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelSubtitulo)
-                .addGap(25, 25, 25)
+                .addGap(46, 46, 46)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -170,7 +161,6 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabelSubtitulo;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JPasswordField pwdSenha;
     private javax.swing.JTextField txtEmail;
